@@ -69,3 +69,8 @@ sudo dnf install azure-cli
 ```
 ./deploy.sh
 ```
+4. To Know the public IP on which this website is running, run below command on the RHEL/Centos/Oracle Linux VM: 
+
+```
+terraform output -raw vm_public_ip
+```
