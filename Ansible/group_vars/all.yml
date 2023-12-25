@@ -1,3 +1,5 @@
+## This is Default Group Variables, in case of not providing them from inventory or command line arguments
+
 mysql_password : Mediaw1k1$
 mediawiki_install_path : /var/www/html/mediawiki
 mediawiki_install_version: 1.41
