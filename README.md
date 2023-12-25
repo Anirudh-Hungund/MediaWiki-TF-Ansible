@@ -76,9 +76,9 @@ sudo dnf install azure-cli
 terraform output -raw vm_public_ip
 ```
 
-### Major Challenges faced during this deployment:
-Faced issues with integrating Terraform and Ansible to run at once. Previously, it used to run with Local-exec in Terraform to trigger Ansible playbooks but, tried to use the Ansible provider in Terraform which is the latest addition that happened in 2023. 
 5. On a browser, open the IP you have obtained from previous step as below:
 ```
 http:// <IP_Address_from_above>
 ```
+### Major Challenges faced during this deployment:
+Due to limited information and documentation, faced issues with integrating Terraform and Ansible to run at once. Previously, it used to run with Local-exec in Terraform to trigger Ansible playbooks but, tried to use the Ansible provider in Terraform which is the latest addition that happened in 2023. 
