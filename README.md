@@ -4,10 +4,11 @@ Media Wiki installation is one of the self-test projects that is being worked on
 ### Technologies Used:
 1. **Terraform**: There are other IAC tools available like Pulumi and Cloud Native tools like Azure ARM, and AWS Cloud Formation, but the decision to use Terraform is due to being accepted as the industry standard and various integrations it has through modules that can be used for Multi-Cloud, be it public or private.
 2. **Ansible**: Similarly, Configuration Management can be done using native tools/shell scripts specific to the Operating Systems like Powershell and Bash Scripts but they are not flexible and cannot be scaled to a lot of servers and parallel deployments. This is where Ansible makes Admins/Devs easier with parallel configuration and can be managed from a single controller and agentless as well.
-### Major Challenges faced during this deployment:
-Faced issues with integrating Terraform and Ansible to run at once. Previously, it used to run with Local-exec in Terraform to trigger Ansible playbooks but, tried to use the Ansible provider in Terraform which is the latest addition that happened in 2023. 
+
+**In this project, have tried to incorporate Terraform's and Ansible's best practices wherever it is feasible.**
+
 ## Deployment Prerequisites:
-**Need to install the below-required tools/softwares to run this script:** 
+**Need to install the below-required tools/software to run this script:** 
  - All the below code is run from a RHEL-based Linux VM and all commands will only apply to this. You would need to replace it with an equivalent for Debian/Ubuntu-based VMs.
 
 |Prerequisite|	Description|
@@ -74,6 +75,9 @@ sudo dnf install azure-cli
 ```
 terraform output -raw vm_public_ip
 ```
+
+### Major Challenges faced during this deployment:
+Faced issues with integrating Terraform and Ansible to run at once. Previously, it used to run with Local-exec in Terraform to trigger Ansible playbooks but, tried to use the Ansible provider in Terraform which is the latest addition that happened in 2023. 
 5. On a browser, open the IP you have obtained from previous step as below:
 ```
 http:// <IP_Address_from_above>
