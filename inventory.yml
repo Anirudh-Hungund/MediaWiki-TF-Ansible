@@ -1,9 +1,1 @@
-# all:
-#   hosts:
-#     centos:
-#       ansible_host: 192.168.1.205
-#       ansible_ssh_user: osboxes
-#       ansible_ssh_pass: osboxes.org
-#       ansible_connection: ssh
-
 plugin: cloud.terraform.terraform_provider
