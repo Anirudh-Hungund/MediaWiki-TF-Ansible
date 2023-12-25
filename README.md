@@ -1,5 +1,3 @@
-# MediaWiki 
-=======
 # Media Wiki Installation Terraform and Ansible on an Azure VM.
 ## Terraform is used for Infrastructure provision on Azure and Ansible is used for configuration of MediaWiki.
 Media Wiki installation is one of the self-test projects that is being worked on and automating the the installation process will show the power of using the IAC tool with a Configuration Management tool. 
