@@ -76,4 +76,5 @@ terraform output -raw vm_public_ip
 ```
 5. On a browser, open the IP you have obtained from previous step as below:
 ```
-http://*IP_Address_from_above*
+http://_<IP_Address_from_above>_
+```
