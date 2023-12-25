@@ -1,0 +1,8 @@
+---
+# tasks file for prerequisite
+- 
+  name: Installing Latest OS Packages Updates
+  become: true
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest

@@ -1,0 +1,84 @@
+---
+# tasks file for configuration
+- name: Starting the MySQL Service Post Installation
+  become: true
+  ansible.builtin.systemd_service:
+    name: mariadb
+    state: started
+
+# mysql_secure_installation
+- name: Update MariaDB root password on localhosts
+  community.mysql.mysql_user: 
+    check_implicit_admin: "true" 
+    name: root 
+    host: "{{ item }}"
+  with_items:
+      - 127.0.0.1
+      - ::1
+      - localhost
+
+  # mysql_secure_installation
+- name: Deleting Anonymous MySQL user as part of securing MySQL
+  community.mysql.mysql_user:  
+    check_implicit_admin: "true"   
+    name: "" 
+    host: localhost
+    state: absent
+
+  # mysql_secure_installation
+- name: Delete Hostname based MySQL user as part of securing MySQL
+  community.mysql.mysql_user:  
+    check_implicit_admin: "true"   
+    name: root 
+    host: localhost
+    state: absent
+
+  # mysql_secure_installation
+- name: Remove MySQL test database as part of securing MySQL
+  community.mysql.mysql_user:
+    check_implicit_admin: "true"   
+    name: test 
+    state: absent
+
+# MySQL configuration 
+- name: MySQL Configuration for creating {{database_name}} DB
+  community.mysql.mysql_db:
+    check_implicit_admin: "true"       
+    name: "{{database_name}}"
+    state: present
+
+# MySQL Configuration
+- name: MySQL Configuration for creating "{{db_admin}}" user as Admin
+  community.mysql.mysql_user:
+    check_implicit_admin: "true"   
+    name: "{{db_admin}}"
+    host: localhost
+    password: "{{ mysql_pass }}"
+    priv:
+      '"{{database_name}}".*': 'ALL,GRANT'
+    state: present
+
+#Restart MariaDB service post user changes
+- name: Restarting MySQL/MariaDB service
+  become: true
+  ansible.builtin.systemd_service:
+    name: mariadb
+    state: restarted
+
+
+# Autostart Web and DB Deamons
+ 
+- name: Setting AutoStart Enable on MySQL/MariaDB service
+  become: true
+  ansible.builtin.systemd_service:
+    name: mariadb
+    enabled: true
+    state: started
+ 
+- name: Setting AutoStart Enable on Apache Service
+  become: true
+  ansible.builtin.systemd_service:
+    name: httpd
+    enabled: true
+    state: started
+

@@ -1,0 +1,29 @@
+---
+- name: PHP Module Reset in CentOS/RHEL
+  become: true
+  ansible.builtin.shell: dnf module reset php -y
+
+- name: Enabling Module of PHP 7.4 in Centos/RHEL
+  become: true
+  ansible.builtin.shell: dnf module enable php:7.4 -y
+  
+- name: Installing Dependencies and Apps of Apache, PHP, MySQL/MariaDB.
+  become: true
+  ansible.builtin.dnf:
+    name: 
+      - httpd
+      - php
+      - php-mysqlnd
+      - php-gd
+      - php-xml
+      - mariadb-server
+      - mariadb
+      - php-mbstring
+      - php-json
+      - mod_ssl
+      - php-intl
+      - php-apcu
+- name: Installing PyMySQL as a dependency of MYSQL tasks
+  become: true
+  pip:
+    name: PyMySQL

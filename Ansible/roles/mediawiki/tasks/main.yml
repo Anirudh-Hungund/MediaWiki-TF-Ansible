@@ -1,0 +1,71 @@
+---
+# tasks file for mediawiki
+
+- name: Creating Folder for Mediawiki under /var/www
+  become: true
+  ansible.builtin.file:
+    path: "{{ mediawikipath }}"
+    state: directory
+    mode: 0755
+
+- name: Download and UnArchive MediaWiki TarBall
+  become: true
+  ansible.builtin.unarchive:
+    src: https://releases.wikimedia.org/mediawiki/{{mediawiki_version}}/mediawiki-{{mediawiki_version}}.0.tar.gz
+    dest: /home
+    remote_src: yes
+    mode: 0755
+    owner: apache
+    group: apache    
+  register: result
+
+- name: MediaWiki Web(Apache) Configuration 
+  become: true
+  ansible.builtin.copy:
+    src: /home/mediawiki-{{mediawiki_version}}.0/
+    dest: "{{mediawikipath}}"
+    owner: apache
+    group: apache
+    mode: 755
+    remote_src: true
+
+- name: Changing the Apache config for pointing httpd to Mediawiki Folder
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: "{{ item.exp }}"
+    line: "{{ item.line }}"
+    state: present
+    backup: yes
+  with_items: 
+    - { exp: 'DocumentRoot "/var/www"', line: 'DocumentRoot "/var/www/html/mediawiki"' }
+    - { exp: '<Directory "/var/www/html">', line: '<Directory "/var/www/html/mediawiki">' }
+    - { exp: 'DirectoryIndex index.html', line: '   DirectoryIndex index.html index.html.var index.php' }
+
+- name: Restarting Apache Service post configuration
+  become: true
+  ansible.builtin.systemd_service:
+    name: httpd
+    state: restarted
+
+# firewall configuration
+- name: Linux Firewall Configuration to allow HTTP and HTTPS on Public Domain
+  become: true
+  ansible.posix.firewalld:
+    state: enabled
+    zone: public
+    permanent: true
+    service: "{{ item }}"
+  with_items: 
+      - https
+      - http
+
+- name: Restarting Linux Firewall 
+  become: true
+  ansible.builtin.systemd_service:
+    name: firewalld
+    state: restarted
+
+- name: Apply new SELinux file context to filesystem on Mediawiki Folder
+  ansible.builtin.command: restorecon -FR "{{mediawikipath}}"
+  become: true

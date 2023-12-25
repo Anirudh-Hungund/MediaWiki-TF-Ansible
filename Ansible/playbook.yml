@@ -1,0 +1,15 @@
+---
+- name: Installing MediaWiki Application
+  hosts: all
+  roles:
+    - osupdate
+    - prerequisite
+    - role: configuration
+      vars:
+        mysql_pass: "{{mysql_password}}"
+        db_admin: "{{db_admin_user}}"
+        database_name: "{{mediawiki_db_name}}"
+    - role: mediawiki
+      vars:
+        mediawikipath : "{{mediawiki_install_path}}"
+        mediawiki_version : "{{mediawiki_install_version}}"

@@ -1,0 +1,5 @@
+mysql_password : Mediaw1k1$
+mediawiki_install_path : /var/www/html/mediawiki
+mediawiki_install_version: 1.41
+db_admin_user: wiki
+mediawiki_db_name: wikidatabase
