@@ -52,7 +52,7 @@ sudo dnf install azure-cli
 
 ## How to Run the code on the VM deployed on RHEL/Centos/Oracle Linux:
 
-1. In the Main directory, where the code is downloaded or cloned, make sure to be inside _<Download_Location>_ directory, where deploy.sh file is present ** Do not CD into subfolders like Ansible/Terraform**.
+1. In the Main directory, where the code is downloaded or cloned, make sure to be inside _<Download_Location>_ directory, where deploy.sh file is present. **Do not CD into subfolders like Ansible/Terraform**.
 
 2. Once you are in the _<Download_Location>_ folder, in your IDE software, open Provider.TF file and edit the below section to your newly created Azure Principal and remove `#` which is at the start of each line. 
 > [!TIP]
