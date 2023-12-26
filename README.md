@@ -52,9 +52,9 @@ sudo dnf install azure-cli
 
 ## How to Run the code on the VM deployed on RHEL/Centos/Oracle Linux:
 
-1. In the Main directory, where the code is downloaded or cloned, make sure to be inside _<Download_Location>_/MediaWiki directory. ** Do not CD into subfolders**.
+1. In the Main directory, where the code is downloaded or cloned, make sure to be inside _<Download_Location>_ directory, where deploy.sh file is present ** Do not CD into subfolders like Ansible/Terraform**.
 
-2. Once you are in the _<Download_Location>_/MediaWiki folder, in your IDE software, open Provider.TF file and edit the below section to your newly created Azure Principal and remove `#` which is at the start of each line. 
+2. Once you are in the _<Download_Location>_ folder, in your IDE software, open Provider.TF file and edit the below section to your newly created Azure Principal and remove `#` which is at the start of each line. 
 > [!TIP]
 > _IN case you want to use Azure CLI interactive login using ` AZ Login`, you can skip this step._
 
@@ -65,18 +65,18 @@ sudo dnf install azure-cli
   # subscription_id = "00000000-0000-0000-000-000000000000" 
 ```
 
-3. Once you are in the _<Download_Location>_/MediaWiki directory, please run the below command, which will trigger both Terraform and Ansible scripts and will show you the running output:
+3. Once you are in the _<Download_Location>_ directory, please run the below command, which will trigger both Terraform and Ansible scripts and will show you the running output:
 
 ```
 ./deploy.sh
 ```
-4. To Know the public IP on which this website is running, run below command on the RHEL/Centos/Oracle Linux VM: 
+4. On the Command prompt once the script is completed, you will know the public IP to browse to the website. In case you missed it, to Know the public IP on which this website is running, run the below command on the RHEL/Centos/Oracle Linux VM: 
 
 ```
 terraform output -raw vm_public_ip
 ```
 
-5. On a browser, open the IP you have obtained from previous step as below:
+5. On a browser, open the IP you have obtained from the previous step as below:
 ```
 http:// <IP_Address_from_above>
 ```
