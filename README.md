@@ -32,13 +32,13 @@ sudo yum -y install terraform
 ```
 2. Installing Ansible on RHEL/Centos/Oracle Linux:
 ```
-dnf install ansible-core
+sudo dnf install ansible-core
 ```
 3. Wait for Ansible core to be installed and install below dependencies:
 ```
-ansible-galaxy collection install community.mysql
-ansible-galaxy collection install ansible.posix
-ansible-galaxy collection install cloud.terraform
+sudo ansible-galaxy collection install community.mysql
+sudo ansible-galaxy collection install ansible.posix
+sudo ansible-galaxy collection install cloud.terraform
 ```
 4. Now, Install Azure CLI:
 ```
