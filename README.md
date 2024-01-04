@@ -27,8 +27,7 @@ Media Wiki installation is one of the self-test projects that is being worked on
 1. Installing Terraform on RHEL/Centos/Oracle Linux:
 ```
 sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo
-https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 sudo yum -y install terraform
 ```
 2. Installing Ansible on RHEL/Centos/Oracle Linux:
